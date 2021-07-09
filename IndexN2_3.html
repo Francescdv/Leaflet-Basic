@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+
+    <!--CSS-->
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+    <title>Leaflet</title>
+</head>
+
+
+<body>
+    <p> Nivell 2</p>
+
+    <p> Crear un fitxer ex2.html amb les 2 següents fases:</p>
+
+    <p> Fase 1</p>
+    <p> Al fer clic en qualsevol punt del mapa, ens haurà de mostrar la latitud i la longitud, juntament amb un zoom
+        màxim al marcador</p>
+
+
+    <p> Fase 2</p>
+    <p> Al mapa només podrà haver-hi un únic marcador. Per tant abans de posar un mou marcador s'haurà de netejar
+        l'anterior.</p>
+    <p> Nivell 3</p>
+
+
+    <p>Personalitza els marcadors de l'exercici anterior</p>
+
+
+
+
+
+    <div id="myMap"></div>
+
+    <style>
+        #myMap {
+            height: 300px;
+            width: 500px;
+            margin-bottom: 50px;
+        }
+    </style>
+
+    <script> //Script
+        var myMap = L.map('myMap').setView([41.38724451108082, 2.166076584554515], 16);
+        var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(myMap);
+        var marker = null;
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize: [38, 95], shadowSize: [50, 64], iconAnchor: [22, 94], shadowAnchor: [4, 62], popupAnchor: [-3, -76]
+            }
+        });
+        var greenIcon = new LeafIcon({ iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png', shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png' })
+
+
+
+
+        function onMapClick(e) {
+
+            if (marker != null) {
+                myMap.removeLayer(marker);
+            }
+
+            marker = L.marker([e.latlng.lat, e.latlng.lng], { icon: greenIcon }).bindPopup("Les corrdenador son " + e.latlng.lat + " " + e.latlng.lng).addTo(myMap);
+
+
+
+        }
+
+        myMap.on('click', onMapClick);
+
+
+
+    </script>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+</html>
